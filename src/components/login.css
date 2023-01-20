@@ -1,0 +1,25 @@
+.login-button {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.login-button img {
+  height: 30px;
+  width: auto;
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .login-button {
+    top: 5px;
+    right: 5px;
+  }
+
+  .login-button img {
+    height: 25px;
+  }
+}

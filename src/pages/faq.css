@@ -1,0 +1,39 @@
+.FAQ {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-list {
+  margin-top: 1rem;
+}
+
+.faq-item {
+  margin-bottom: 1rem;
+}
+
+.faq-question {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid #ccc;
+}
+
+.faq-answer.open {
+  max-height: 1000px;
+}
+
+.sub-faq-list {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 1px solid #ccc;
+}
+
