@@ -17,8 +17,7 @@ const About = React.lazy(() => import("./pages/about"));
 const Contact = React.lazy(() => import("./pages/contact"));
 const PrivateForm = React.lazy(() => import("./pages/privateInsurance"));
 
-const frontendApi = process.env.REACT_APP_CLERK_FRONTEND_API;
-const publishableKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
+
 console.log("imported everything App...");
 function AppRoutes() {
   console.log("Rendering App...");
@@ -26,7 +25,6 @@ function AppRoutes() {
 
   return (
     <ClerkProvider
-      frontendApi={process.env.REACT_APP_CLERK_FRONTEND_API || ""}
       publishableKey={process.env.REACT_APP_CLERK_PUBLISHABLE_KEY || ""}
     >
       <SignedIn>
