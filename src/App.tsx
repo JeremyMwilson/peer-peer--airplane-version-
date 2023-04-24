@@ -26,9 +26,8 @@ function AppRoutes() {
 
   return (
     <ClerkProvider
-      frontendApi={frontendApi}
-      publishableKey={publishableKey}
-      navigate={(to) => navigate(to)}
+      frontendApi={process.env.REACT_APP_CLERK_FRONTEND_API || ""}
+      publishableKey={process.env.REACT_APP_CLERK_PUBLISHABLE_KEY || ""}
     >
       <SignedIn>
         <BrowserRouter>

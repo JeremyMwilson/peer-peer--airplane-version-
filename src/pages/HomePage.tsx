@@ -6,7 +6,7 @@ import "../App.css";
 function HomePage() {
   return (
     <div className="HomePage">
-      <SidebarMenu />
+      <SidebarMenu children={<div />} />
       <h1>The Health Insurance App</h1>
       <h2>The Health Insurance App</h2>
       <div>

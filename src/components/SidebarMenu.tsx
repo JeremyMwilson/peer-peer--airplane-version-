@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SidebarMenu.css";
 
-const SidebarMenu = ({ children }) => {
+const SidebarMenu = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
