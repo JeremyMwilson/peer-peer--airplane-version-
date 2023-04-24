@@ -6,6 +6,9 @@ import {
   Window,
   MessageList,
   MessageInput,
+  MessageResponse,
+  DefaultUserType,
+  DefaultChannelType,
 } from "stream-chat-react";
 import { StreamChat } from "stream-chat";
 import "stream-chat-react/dist/css/index.css";
@@ -28,7 +31,7 @@ function Contact() {
   useEffect(() => {
     if (user) {
       const userToken = user.publicMetadata.streamUserToken;
-      client.connectUser({ id: user.id }, userToken);
+      client.connectUser({ id: user.id }, userToken as TokenOrProvider);
     }
   }, [user]);
 

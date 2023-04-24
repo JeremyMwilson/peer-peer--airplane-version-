@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import SidebarMenu from "../components/SidebarMenu";
-import styles from "./pages/photoUpload.module.css";
-import { useAuth } from "./pages/AuthProvider";
 import axios from "axios";
 
 function PhotoUpload() {
@@ -12,13 +10,14 @@ function PhotoUpload() {
   const [photoUploaded, setPhotoUploaded] = useState(false);
   const [photoPreviewUrl, setPhotoPreviewUrl] = useState<string | null>(null);
 
-  const handleLogout = () => {
+  const handleLogout = (event: any) => {
     // Handle logout here (set loggedIn state to false and clear user data)
   };
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    const file = event.target.files[0];
+    const file = event.target.files?.[0];
+    if (!file) return;
     const reader = new FileReader();
 
     reader.onloadend = () => {
@@ -78,7 +77,7 @@ function PhotoUpload() {
         <div className="photo-preview-container">
           <img
             className="photo-preview"
-            src={photoPreviewUrl}
+            src={photoPreviewUrl ? photoPreviewUrl : ""}
             alt="Uploaded photo"
           />
           <div className="photo-actions">

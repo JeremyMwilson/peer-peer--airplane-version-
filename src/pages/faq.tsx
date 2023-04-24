@@ -134,7 +134,7 @@ const FAQ = () => {
           <FaqItem
             key={index}
             question={faq.question}
-            answer={faq.answer}
+            answer={faq.answer || ""}
             subFAQs={faq.subFAQs}
           />
         ))}
