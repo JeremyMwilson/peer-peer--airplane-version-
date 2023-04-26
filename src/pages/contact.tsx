@@ -1,29 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-  Chat,
+  StreamChat,
   Channel,
-  ChannelHeader,
   Window,
+  ChannelHeader,
   MessageList,
   MessageInput,
-  MessageResponse,
-  DefaultUserType,
-  DefaultChannelType,
 } from "stream-chat-react";
-import { StreamChat } from "stream-chat";
+import type {
+  UserResponse,
+  ChannelResponse,
+  MessageResponse,
+  TokenOrProvider,
+} from "stream-chat";
 import "stream-chat-react/dist/css/index.css";
 import { useUser } from "@clerk/clerk-react";
 
-const apiKey = "kcr8y24ntv2w";
+const apiKey = "YOUR_STREAM_CHAT_API_KEY";
 const channelType = "messaging";
 const channelId = "general";
 
 const client = StreamChat.getInstance(apiKey);
 
 function Contact() {
-  const [messages, setMessages] = useState<
-    MessageResponse<DefaultUserType, DefaultChannelType>[]
-  >([]);
+  const [messages, setMessages] = useState<MessageResponse[]>([]);
   const chatOutputRef = useRef(null);
 
   const { user } = useUser();
@@ -31,14 +31,20 @@ function Contact() {
   useEffect(() => {
     if (user) {
       const userToken = user.publicMetadata.streamUserToken;
-      client.connectUser({ id: user.id }, userToken as TokenOrProvider);
+      client.connectUser(
+        { id: user.id } as UserResponse,
+        userToken as TokenOrProvider
+      );
     }
   }, [user]);
 
   useEffect(() => {
     // fetch messages and set them as state
     const fetchMessages = async () => {
-      const channel = client.channel(channelType, channelId);
+      const channel = client.channel(channelType, channelId) as Channel<
+        DefaultGenerics,
+        DefaultGenerics
+      >;
       const result = await channel.query({ messages: { limit: 100 } });
       setMessages(result.messages);
     };
@@ -46,22 +52,23 @@ function Contact() {
   }, []);
 
   const handleSendMessage = async (text: string) => {
-    const channel = client.channel(channelType, channelId);
+    const channel = client.channel(channelType, channelId) as Channel<
+      DefaultGenerics,
+      DefaultGenerics
+    >;
     await channel.sendMessage({ text });
   };
 
   return (
     <div className="Contact">
       <h1>Client Chat</h1>
-      <Chat client={client}>
-        <Channel channel={client.channel(channelType, channelId)}>
-          <Window>
-            <ChannelHeader />
-            <MessageList messages={messages} />
-            <MessageInput sendMessage={handleSendMessage} />
-          </Window>
-        </Channel>
-      </Chat>
+      <Channel channel={client.channel(channelType, channelId)}>
+        <Window>
+          <ChannelHeader />
+          <MessageList messages={messages} />
+          <MessageInput sendMessage={handleSendMessage} />
+        </Window>
+      </Channel>
     </div>
   );
 }

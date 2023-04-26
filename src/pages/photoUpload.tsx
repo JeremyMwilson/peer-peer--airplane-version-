@@ -72,7 +72,7 @@ function PhotoUpload() {
 
   return (
     <div className="photo-upload-container">
-      <SidebarMenu />
+      <SidebarMenu children={<div />} />
       {photoUploaded ? (
         <div className="photo-preview-container">
           <img
@@ -92,13 +92,11 @@ function PhotoUpload() {
       ) : (
         <div className="upload-container">
           <input id="image-upload" type="file" onChange={handleImageUpload} />
-          <button
-            className="upload-button"
-            disabled={!photo}
-            onClick={handleSubmit}
-          >
-            Upload
-          </button>
+          <form onSubmit={handleSubmit}>
+            <button className="upload-button" disabled={!photo} type="submit">
+              Upload
+            </button>
+          </form>
         </div>
       )}
     </div>
